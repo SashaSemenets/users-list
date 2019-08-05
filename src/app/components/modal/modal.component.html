@@ -1,0 +1,91 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">New User</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate [formGroup]="newUser" (ngSubmit)="inviteUser(newUser)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nameField">Name:</label>
+        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter your name">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="ageField">Age:</label>
+        <input formControlName="age" type="number" class="form-control" id="age" placeholder="Enter your age">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="emailField">Email:</label>
+        <input formControlName="email" type="email" class="form-control" id="emailField" placeholder="Email">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="addressField">Address:</label>
+        <input formControlName="address" type="text" class="form-control" id="addressField" placeholder="Address">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="phoneField">Phone:</label>
+        <input formControlName="phone" type="tel" class="form-control" id="phoneField" name="phone"
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="companyField">Company:</label>
+        <input formControlName="company" type="text" class="form-control" id="companyField" placeholder="Company">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="eyeColorField">Eye Color:</label>
+        <input formControlName="eyeColor" type="text" class="form-control" id="eyeColorField" placeholder="Eye color">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="genderField">Gender:</label>
+        <select id="genderField" class="form-control" formControlName="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4" style="padding: 0;">
+        <label for="balanceField">Balance:</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">$</div>
+          </div>
+          <input formControlName="balance" type="text" class="form-control" id="balanceField" placeholder="Balance">
+        </div>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="activeField">Active:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="activeField" formControlName="isActive">
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="latitudeField">Latitude:</label>
+        <input formControlName="latitude" type="text" class="form-control" id="latitudeField" placeholder="Latitude">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="longitudeField">Longitude:</label>
+        <input formControlName="longitude" type="text" class="form-control" id="longitudeField" placeholder="Longitude">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="aboutField">About:</label>
+        <textarea formControlName="about" class="form-control" id="aboutField" rows="3" placeholder="About"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="tagsField">Tags:</label>
+        <p-chips formControlName="tags" id="tagsField"></p-chips>
+      </div>
+    </div>
+    <button *ngIf="!editable" type="submit" class="btn btn-primary">Submit</button>
+    <button *ngIf="editable" class="btn btn-warning" (click)="onEditUser(newUser)">Edit</button>
+  </form>
+</div>

@@ -1,0 +1,23 @@
+#phoneField, #tagsField {
+  ::ng-deep .ui-inputtext {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    height: 38px;
+  }
+}
+
+#tagsField {
+  ::ng-deep .ui-inputtext {
+    height: auto;
+    .ui-chips-token {
+      margin-bottom: 0.286em;
+    }
+  }
+}

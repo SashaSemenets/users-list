@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-link" (click)="onBack()">
+        <i class="pi pi-angle-left"></i>Back
+      </button>
+    </div>
+    <div class="col-sm-10">
+      <div class="card">
+        <div class="image-container">
+          <img [attr.src]="user.picture" class="card-img-top" alt="user picture">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Name: {{ user.name }}</h5>
+          <p class="card-text">About: {{ user.about }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Balance: {{ user.balance }}</li>
+          <li class="list-group-item">Age: {{ user.age }}</li>
+          <li class="list-group-item">Email: {{ user.email }}</li>
+          <li class="list-group-item">Phone: {{ user.phone }}</li>
+          <li class="list-group-item">Address: {{ user.address }}</li>
+          <li class="list-group-item">Tags: 
+            <ul>
+              <li *ngFor="let tag of user.tags">
+                <span class="badge badge-primary">{{ tag }}</span>
+              </li>
+            </ul>
+          </li>
+          <li class="list-group-item">Register: {{ user.registered | customDate }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
