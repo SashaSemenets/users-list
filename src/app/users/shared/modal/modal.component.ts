@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { IAppState } from '../../store/state/app.state';
-import { AddNewUser, EditOneUser } from '../../store/actions/user.action';
-import { IUser } from '../../models/user';
+import { IAppState } from '../../../store/state/app.state';
+import { AddNewUser, EditOneUser } from '../../../store/actions/user.action';
+import { IUser } from '../../../users/shared/user';
 
 @Component({
   selector: 'app-modal',
@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
   editable = false;
 
   newUser: FormGroup = new FormGroup({
-    _id: new FormControl(0),
+    _id: new FormControl(null),
     balance: new FormControl(0),
     name: new FormControl(''),
     age: new FormControl(0),
@@ -53,10 +53,8 @@ export class ModalComponent implements OnInit {
   }
 
   inviteUser(form: NgForm) {
-    if (form.valid) {
-      const result = this.getValuesFromForm(form);
-      this.store.dispatch(new AddNewUser(result));
-    }
+    const result = this.getValuesFromForm(form);
+    this.store.dispatch(new AddNewUser(result));
     this.hide();
   }
 
@@ -79,7 +77,7 @@ export class ModalComponent implements OnInit {
       phone: form.controls.phone.value,
       address: form.controls.address.value,
       about: form.controls.about.value,
-      registered: String(new Date()),
+      registered: new Date().toISOString(),
       latitude: Number(form.controls.latitude.value),
       longitude: Number(form.controls.longitude.value),
       tags: form.controls.tags.value

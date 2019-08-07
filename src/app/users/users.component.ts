@@ -1,10 +1,9 @@
-import { GetUsers } from './../../store/actions/user.action';
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-
-import { IAppState } from '../../store/state/app.state';
-import { selectUsersList } from '../../store/selectors/user.selector';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { selectUsersList } from '../store/selectors/user.selector';
+import { IAppState } from '../store/state/app.state';
+import { GetUsers } from '../store/actions/user.action';
 
 @Component({
   templateUrl: './users.component.html',

@@ -8,8 +8,8 @@ import {
   GetUsersSuccess, EUserActions, GetUserSuccess, GetUser, GetUsers, AddNewUser,
    AddNewUserSuccess, DeleteOneUser, DeleteOneUserSuccess, EditOneUser, EditOneUserSuccess
 } from '../actions/user.action';
-import { UserService } from '../../services/user.service';
-import { IUserHttp } from '../../models/http-models/user-http.interface';
+import { UserService } from '../../users/shared/user.service';
+import { IUserHttp } from '../../users/shared/http-models/user-http.interface';
 import { selectUsersList, addNewUser, deleteOneUser } from '../selectors/user.selector';
 
 @Injectable()

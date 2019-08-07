@@ -4,14 +4,14 @@ import { IAppState } from '../../store/state/app.state';
 import { DeleteOneUser } from '../../store/actions/user.action';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { IUser } from '../../models/user';
+import { IUser } from '../../users/shared/user';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UserListComponent implements OnInit {
   @Input()
   users: IUser[];
   modalRef: BsModalRef;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
-import { IUser } from '../../models/user';
+import { IUser } from '../../users/shared/user';
 
 @Component({
   selector: 'app-user-details',
@@ -14,6 +14,7 @@ export class UserDetailsComponent implements OnInit {
   constructor(private location: Location) {}
 
   ngOnInit() {
+    this.user.registered = this.user.registered.split(' ').join('');
   }
 
   onBack() {
