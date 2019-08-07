@@ -5,6 +5,7 @@ import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { IAppState } from '../../../store/state/app.state';
 import { AddNewUser, EditOneUser } from '../../../store/actions/user.action';
 import { IUser } from '../../../users/shared/user';
+import { UserFormGroup } from '../../shared/user-form.model';
 
 @Component({
   selector: 'app-modal',
@@ -13,28 +14,11 @@ import { IUser } from '../../../users/shared/user';
 })
 export class ModalComponent implements OnInit {
   modalRef: BsModalRef;
+  userFormGroup: UserFormGroup = new UserFormGroup();
   @Input()
   user: IUser;
   editable = false;
-
-  newUser: FormGroup = new FormGroup({
-    _id: new FormControl(null),
-    balance: new FormControl(0),
-    name: new FormControl(''),
-    age: new FormControl(0),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    address: new FormControl(''),
-    about: new FormControl(''),
-    tags: new FormControl([]),
-    company: new FormControl(''),
-    eyeColor: new FormControl(''),
-    gender: new FormControl('male'),
-    isActive: new FormControl(true),
-    latitude: new FormControl(''),
-    longitude: new FormControl(''),
-    picture: new FormControl(''),
-  });
+  formSubmitted = false;
 
   constructor(
     private store: Store<IAppState>,
@@ -44,7 +28,7 @@ export class ModalComponent implements OnInit {
     if (this.user) {
       this.editable = true;
       this.user.balance = this.user.balance.substr(1);
-      Object.keys(this.newUser.controls).forEach((prop) => this.newUser.controls[prop].setValue(this.user[prop]));
+      Object.keys(this.userFormGroup.controls).forEach((prop) => this.userFormGroup.controls[prop].setValue(this.user[prop]));
     }
   }
 
@@ -53,9 +37,14 @@ export class ModalComponent implements OnInit {
   }
 
   inviteUser(form: NgForm) {
-    const result = this.getValuesFromForm(form);
-    this.store.dispatch(new AddNewUser(result));
-    this.hide();
+    this.formSubmitted = true;
+    if (form.valid) {
+      const result = this.getValuesFromForm(form);
+      this.store.dispatch(new AddNewUser(result));
+      this.hide();
+      form.reset();
+      this.formSubmitted = false;
+    }
   }
 
   getValuesFromForm(form: NgForm) {

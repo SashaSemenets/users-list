@@ -1,91 +1,176 @@
 <div class="modal-header">
-  <h4 class="modal-title pull-left">New User</h4>
+  <h4 class="modal-title pull-left" *ngIf="!editable">New User</h4>
+  <h4 class="modal-title pull-left" *ngIf="editable">Edit {{ user.name }}</h4>
   <button type="button" class="close pull-right" aria-label="Close" (click)="hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form novalidate [formGroup]="newUser" (ngSubmit)="inviteUser(newUser)">
+  <form novalidate [formGroup]="userFormGroup" (ngSubmit)="inviteUser(userFormGroup)">
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="nameField">Name:</label>
-        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter your name">
+        <label for="nameField">{{ userFormGroup.controls.name.label }}:</label>
+        <input type="text" class="form-control" id="nameField"
+          formControlName="{{userFormGroup.controls.name.modelProperty}}"
+          name="{{userFormGroup.controls.name.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.name.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.name.dirty) && userFormGroup.controls.name.invalid">
+          <span *ngFor="let error of userFormGroup.controls.name.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="ageField">Age:</label>
-        <input formControlName="age" type="number" class="form-control" id="age" placeholder="Enter your age">
+        <label for="ageField">{{ userFormGroup.controls.age.label }}:</label>
+        <input type="number" class="form-control" id="age"
+          formControlName="{{userFormGroup.controls.age.modelProperty}}"
+          name="{{userFormGroup.controls.age.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.age.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.age.dirty) && userFormGroup.controls.age.invalid">
+          <span *ngFor="let error of userFormGroup.controls.age.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="emailField">Email:</label>
-        <input formControlName="email" type="email" class="form-control" id="emailField" placeholder="Email">
+        <label for="emailField">{{ userFormGroup.controls.email.label }}:</label>
+        <input type="email" class="form-control" id="emailField"
+          formControlName="{{userFormGroup.controls.email.modelProperty}}"
+          name="{{userFormGroup.controls.email.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.email.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.email.dirty) && userFormGroup.controls.email.invalid">
+          <span *ngFor="let error of userFormGroup.controls.email.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="addressField">Address:</label>
-        <input formControlName="address" type="text" class="form-control" id="addressField" placeholder="Address">
+        <label for="addressField">{{ userFormGroup.controls.address.label }}:</label>
+        <input type="text" class="form-control" id="addressField"
+          formControlName="{{userFormGroup.controls.address.modelProperty}}"
+          name="{{userFormGroup.controls.address.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.address.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.address.dirty) && userFormGroup.controls.address.invalid">
+          <span *ngFor="let error of userFormGroup.controls.address.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="phoneField">Phone:</label>
-        <input formControlName="phone" type="tel" class="form-control" id="phoneField" name="phone"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Phone">
+        <label for="phoneField">{{ userFormGroup.controls.phone.label }}:</label>
+        <input type="tel" class="form-control" id="phoneField"
+          formControlName="{{userFormGroup.controls.phone.modelProperty}}"
+          name="{{userFormGroup.controls.phone.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.phone.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.phone.dirty) && userFormGroup.controls.phone.invalid">
+          <span *ngFor="let error of userFormGroup.controls.phone.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="companyField">Company:</label>
-        <input formControlName="company" type="text" class="form-control" id="companyField" placeholder="Company">
+        <label for="companyField">{{ userFormGroup.controls.company.label }}:</label>
+        <input type="text" class="form-control" id="companyField"
+          formControlName="{{userFormGroup.controls.company.modelProperty}}"
+          name="{{userFormGroup.controls.company.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.company.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.company.dirty) && userFormGroup.controls.company.invalid">
+          <span *ngFor="let error of userFormGroup.controls.company.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-3">
-        <label for="eyeColorField">Eye Color:</label>
-        <input formControlName="eyeColor" type="text" class="form-control" id="eyeColorField" placeholder="Eye color">
+        <label for="eyeColorField">{{ userFormGroup.controls.eyeColor.label }}:</label>
+        <input type="text" class="form-control" id="eyeColorField"
+          formControlName="{{userFormGroup.controls.eyeColor.modelProperty}}"
+          name="{{userFormGroup.controls.eyeColor.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.eyeColor.dirty) && userFormGroup.controls.eyeColor.invalid">
+          <span *ngFor="let error of userFormGroup.controls.eyeColor.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-3">
-        <label for="genderField">Gender:</label>
-        <select id="genderField" class="form-control" formControlName="gender">
+        <label for="genderField">{{ userFormGroup.controls.gender.label }}:</label>
+        <select id="genderField" class="form-control" formControlName="{{userFormGroup.controls.gender.modelProperty}}">
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.gender.dirty) && userFormGroup.controls.gender.invalid">
+          <span *ngFor="let error of userFormGroup.controls.gender.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-4" style="padding: 0;">
-        <label for="balanceField">Balance:</label>
+        <label for="balanceField">{{ userFormGroup.controls.balance.label }}:</label>
         <div class="input-group mb-2">
           <div class="input-group-prepend">
             <div class="input-group-text">$</div>
           </div>
-          <input formControlName="balance" type="text" class="form-control" id="balanceField" placeholder="Balance">
+          <input type="text" class="form-control" id="balanceField"
+            formControlName="{{userFormGroup.controls.balance.modelProperty}}"
+            name="{{userFormGroup.controls.balance.modelProperty}}"
+            placeholder="Enter your {{userFormGroup.controls.balance.modelProperty}}">
+          <div class="invalid-feedback"
+            *ngIf="(formSubmitted || userFormGroup.controls.balance.dirty) && userFormGroup.controls.balance.invalid">
+            <span *ngFor="let error of userFormGroup.controls.balance.getValidationMessages()">{{ error }}</span>
+          </div>
         </div>
       </div>
       <div class="form-group col-md-2">
-        <label for="activeField">Active:</label>
+        <label for="activeField">{{ userFormGroup.controls.isActive.label }}:</label>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="activeField" formControlName="isActive">
+          <input class="form-check-input" type="checkbox" id="activeField" formControlName="{{userFormGroup.controls.isActive.modelProperty}}">
+          <div class="invalid-feedback"
+            *ngIf="(formSubmitted || userFormGroup.controls.isActive.dirty) && userFormGroup.controls.isActive.invalid">
+            <span *ngFor="let error of userFormGroup.controls.isActive.getValidationMessages()">{{ error }}</span>
+          </div>
         </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="latitudeField">Latitude:</label>
-        <input formControlName="latitude" type="text" class="form-control" id="latitudeField" placeholder="Latitude">
+        <label for="latitudeField">{{ userFormGroup.controls.latitude.label }}:</label>
+        <input type="text" class="form-control" id="latitudeField"
+          formControlName="{{userFormGroup.controls.latitude.modelProperty}}"
+          name="{{userFormGroup.controls.latitude.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.latitude.modelProperty}}">
+        <div class="invalid-feedback"
+          *ngIf="(formSubmitted || userFormGroup.controls.latitude.dirty) && userFormGroup.controls.latitude.invalid">
+          <span *ngFor="let error of userFormGroup.controls.latitude.getValidationMessages()">{{ error }}</span>
+        </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="longitudeField">Longitude:</label>
-        <input formControlName="longitude" type="text" class="form-control" id="longitudeField" placeholder="Longitude">
+        <label for="longitudeField">{{ userFormGroup.controls.longitude.label }}:</label>
+        <input type="text" class="form-control" id="longitudeField"
+          formControlName="{{userFormGroup.controls.longitude.modelProperty}}"
+          name="{{userFormGroup.controls.longitude.modelProperty}}"
+          placeholder="Enter your {{userFormGroup.controls.longitude.modelProperty}}">
+          <div class="invalid-feedback"
+            *ngIf="(formSubmitted || userFormGroup.controls.longitude.dirty) && userFormGroup.controls.longitude.invalid">
+            <span *ngFor="let error of userFormGroup.controls.longitude.getValidationMessages()">{{ error }}</span>
+          </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="aboutField">About:</label>
-        <textarea formControlName="about" class="form-control" id="aboutField" rows="3" placeholder="About"></textarea>
+        <label for="aboutField">{{ userFormGroup.controls.about.label }}:</label>
+        <textarea class="form-control" id="aboutField" rows="3"
+          formControlName="{{userFormGroup.controls.about.modelProperty}}"
+          name="{{userFormGroup.controls.about.modelProperty}}"></textarea>
+          <div class="invalid-feedback"
+            *ngIf="(formSubmitted || userFormGroup.controls.about.dirty) && userFormGroup.controls.about.invalid">
+            <span *ngFor="let error of userFormGroup.controls.about.getValidationMessages()">{{ error }}</span>
+          </div>
       </div>
       <div class="form-group col-md-6">
-        <label for="tagsField">Tags:</label>
-        <p-chips formControlName="tags" id="tagsField"></p-chips>
+        <label for="tagsField">{{ userFormGroup.controls.tags.label }}:</label>
+        <p-chips id="tagsField" formControlName="{{userFormGroup.controls.tags.modelProperty}}"></p-chips>
       </div>
     </div>
-    <button *ngIf="!editable" type="submit" class="btn btn-primary">Submit</button>
-    <button *ngIf="editable" class="btn btn-warning" (click)="onEditUser(newUser)">Edit</button>
+    <button *ngIf="!editable" type="submit" class="btn btn-primary"
+      [disabled]="formSubmitted && userFormGroup.invalid">Submit</button>
+    <button *ngIf="editable" class="btn btn-warning" (click)="onEditUser(userFormGroup)"
+      [disabled]="formSubmitted && userFormGroup.invalid">Edit</button>
   </form>
 </div>
