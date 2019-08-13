@@ -6,7 +6,7 @@ import { switchMap, map, withLatestFrom } from 'rxjs/operators';
 import { IAppState } from '../state/app.state';
 import {
   GetUsersSuccess, EUserActions, GetUserSuccess, GetUser, GetUsers, AddNewUser,
-   AddNewUserSuccess, DeleteOneUser, DeleteOneUserSuccess, EditOneUser, EditOneUserSuccess
+   AddNewUserSuccess, DeleteOneUser, DeleteOneUserSuccess, EditOneUser, EditOneUserSuccess, InitState, InitStateSuccess
 } from '../actions/user.action';
 import { UserService } from '../../users/shared/user.service';
 import { IUserHttp } from '../../users/shared/http-models/user-http.interface';
@@ -14,6 +14,15 @@ import { selectUsersList, addNewUser, deleteOneUser } from '../selectors/user.se
 
 @Injectable()
 export class UserEffects {
+  @Effect()
+  initState$ = this.actions$.pipe(
+    ofType<InitState>(EUserActions.InitState),
+    switchMap(() => this.userService.getUsers()),
+    switchMap((userHttp: IUserHttp) => {
+      return of(new InitStateSuccess(userHttp.users));
+    })
+  );
+
   @Effect()
   getUser$ = this.actions$.pipe(
     ofType<GetUser>(EUserActions.GetUser),
@@ -28,9 +37,8 @@ export class UserEffects {
   @Effect()
   getUsers$ = this.actions$.pipe(
     ofType<GetUsers>(EUserActions.GetUsers),
-    switchMap(() => this.userService.getUsers()),
-    switchMap((userHttp: IUserHttp) => {
-      return of(new GetUsersSuccess(userHttp.users));
+    switchMap(() => {
+      return of(new GetUsersSuccess());
     })
   );
 

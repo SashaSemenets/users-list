@@ -3,11 +3,14 @@ import { IUserState, initialUserState } from '../state/user.state';
 
 export const userReducer = (state = initialUserState, action: UserActions): IUserState => {
   switch (action.type) {
-    case EUserActions.GetUsersSuccess: {
+    case EUserActions.InitStateSuccess: {
       return {
         ...state,
         users: action.payload
       };
+    }
+    case EUserActions.GetUsersSuccess: {
+      return state;
     }
     case EUserActions.GetUserSuccess: {
       return {

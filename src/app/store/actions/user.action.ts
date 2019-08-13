@@ -2,6 +2,8 @@ import { Action } from '@ngrx/store';
 import { IUser } from '../../users/shared/user';
 
 export enum EUserActions {
+  InitState = '[User] Init State',
+  InitStateSuccess = '[User] Init State Success',
   GetUsers = '[User] Get Users',
   GetUsersSuccess = '[User] Get Users Success',
   GetUser = '[User] Get User',
@@ -14,13 +16,21 @@ export enum EUserActions {
   EditOneUserSuccess = '[User] Edit One User Success'
 }
 
+export class InitState implements Action {
+  public readonly type = EUserActions.InitState;
+}
+
+export class InitStateSuccess implements Action {
+  public readonly type = EUserActions.InitStateSuccess;
+  constructor(public payload: IUser[]) {}
+}
+
 export class GetUsers implements Action {
   public readonly type = EUserActions.GetUsers;
 }
 
 export class GetUsersSuccess implements Action {
   public readonly type = EUserActions.GetUsersSuccess;
-  constructor(public payload: IUser[]) {}
 }
 
 export class GetUser implements Action {
@@ -63,5 +73,5 @@ export class EditOneUserSuccess implements Action {
   constructor(public payload: IUser) {}
 }
 
-export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess |
+export type UserActions = GetUsers | GetUsersSuccess | GetUser | GetUserSuccess | InitState | InitStateSuccess |
  AddNewUser | AddNewUserSuccess | DeleteOneUser | DeleteOneUserSuccess | EditOneUser | EditOneUserSuccess;
